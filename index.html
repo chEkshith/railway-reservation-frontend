@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RailPass - Premium Indian Railways Booking Portal</title>
+  
+  <!-- Premium Stylesheets & Fonts -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="rail1.jpg" type="image/jpeg" />
+</head>
+<body>
+
+  <!-- Dynamic Aesthetic Backgrounds -->
+  <div class="bg-overlay" style="background-image: url('rail2.jpg');"></div>
+  <div class="bg-gradient-shade"></div>
+
+  <!-- Main Floating Header & Navigation -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <!-- SVG Vector Train Logo -->
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4zm0 2c3.5 0 6 .5 6 2H6c0-1.5 2.5-2 6-2zm5 11.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-8 0c0 .83-.67 1.5-1.5 1.5S6 16.33 6 15.5 6.67 14 7.5 14s1.5.67 1.5 1.5zM17 11H7V8h10v3z"/>
+        </svg>
+        <span>RailPass</span>
+      </div>
+      <ul>
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="train.html">Train Info</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Central User Dashboard -->
+  <main>
+    <!-- Glassmorphic Booking Search Console -->
+    <section class="search-section">
+      <h1>Book Your Train Tickets</h1>
+      
+      <!-- Trip Toggles -->
+      <div class="search-toggles">
+        <button type="button" class="toggle-btn active" id="one-way-btn">One-Way Journey</button>
+        <button type="button" class="toggle-btn" id="round-trip-btn">Round-Trip Journey</button>
+      </div>
+
+      <form id="search-form" autocomplete="off">
+        <div class="search-form-grid">
+          
+          <!-- Source Station -->
+          <div class="input-box">
+            <label for="from">From Station</label>
+            <div class="input-field-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/></svg>
+              <input type="text" id="from" placeholder="Departure City (e.g., Noida)" required />
+            </div>
+            <div class="autocomplete-dropdown" id="from-suggestions"></div>
+          </div>
+
+          <!-- Destination Station -->
+          <div class="input-box">
+            <label for="to">To Station</label>
+            <div class="input-field-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <input type="text" id="to" placeholder="Arrival City (e.g., Bengaluru)" required />
+            </div>
+            <div class="autocomplete-dropdown" id="to-suggestions"></div>
+          </div>
+
+          <!-- Date of Travel -->
+          <div class="input-box">
+            <label for="journey-date">Date of Journey</label>
+            <div class="input-field-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+              <input type="date" id="journey-date" required />
+            </div>
+          </div>
+
+          <!-- Class Preferences -->
+          <div class="input-box">
+            <label for="travel-class">Travel Class</label>
+            <div class="input-field-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+              <select id="travel-class">
+                <option value="1A">AC First Class (1A)</option>
+                <option value="2A">AC 2 Tier (2A)</option>
+                <option value="3A" selected>AC 3 Tier (3A)</option>
+                <option value="CC">AC Chair Car (CC)</option>
+                <option value="SL">Sleeper Class (SL)</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="search-btn-container">
+          <button type="submit" class="search-btn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="display:inline-block; vertical-align:middle; margin-right: 4px;"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <span>Search Trains</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Search Results Populator -->
+    <section class="results-section" id="results-section">
+      <!-- Results load dynamically via script.js -->
+    </section>
+  </main>
+
+  <!-- INTERACTIVE SEAT SELECTION MODAL -->
+  <div class="modal-overlay" id="seat-map-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Coach Map & Seat Selection</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE CONFIRMATION TICKET MODAL -->
+  <div class="modal-overlay" id="ticket-modal">
+    <div class="modal-container" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Electronic Boarding Ticket</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBER AUTHENTICATION REQUIRED MODAL -->
+  <div class="modal-overlay" id="auth-required-modal">
+    <div class="modal-container" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Member Authentication</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULATED PAYMENT GATEWAY MODAL -->
+  <div class="modal-overlay" id="payment-modal">
+    <div class="modal-container" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Secure Checkout Gate</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- High-End Multi-Column Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h4>RailPass</h4>
+        <p>A next-generation, high-performance web platform designed to streamline national railway ticket distribution with absolute visual precision and speed.</p>
+        <p style="margin-top: 1rem;">Made by Group No.3 | Production Ready</p>
+      </div>
+      
+      <div class="footer-links">
+        <h5>Quick Portals</h5>
+        <ul>
+          <li><a href="index.html">Search Journeys</a></li>
+          <li><a href="train.html">Train Information</a></li>
+          <li><a href="login.html">Member Access</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Legal & Safety</h5>
+        <ul>
+          <li><a href="#">Privacy Framework</a></li>
+          <li><a href="#">Terms of Carriage</a></li>
+          <li><a href="#">Refund Guidelines</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 RailPass Reservation. Designed for absolute production standards.</p>
+      <p>System Online: 99.9% SLA</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Trip type button toggles styling logic
+    const oneWayBtn = document.getElementById("one-way-btn");
+    const roundTripBtn = document.getElementById("round-trip-btn");
+    if (oneWayBtn && roundTripBtn) {
+      oneWayBtn.addEventListener("click", () => {
+        oneWayBtn.classList.add("active");
+        roundTripBtn.classList.remove("active");
+      });
+      roundTripBtn.addEventListener("click", () => {
+        roundTripBtn.classList.add("active");
+        oneWayBtn.classList.remove("active");
+      });
+    }
+
+    // Set minimum date of travel to today
+    const dateInput = document.getElementById("journey-date");
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+      dateInput.value = today;
+    }
+  </script>
+</body>
+</html>

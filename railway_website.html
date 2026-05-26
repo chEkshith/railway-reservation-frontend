@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Railway Reservation System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="rail1.jpg" type="image/png" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Railway Reservation</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="train.html">Trains</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <h1>Book Your Train Tickets</h1>
+      <form id="search-form">
+        <input type="text" id="from" placeholder="From (e.g., Noida)" required />
+        <input type="text" id="to" placeholder="To (e.g., Bengaluru)" required />
+        <input type="date" id="journey-date" required />
+        <button type="submit">Search</button>
+      </form>
+    </section>
+    <section class="results-section" id="results-section">
+      <!-- Results will be populated here -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Railway Reservation System</p>
+    <p>Made by CIC student</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

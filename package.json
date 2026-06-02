@@ -1,0 +1,11 @@
+{
+  "name": "railpass-railway-reservation",
+  "version": "1.0.0",
+  "description": "Premium Fullstack Indian Railways Booking Portal",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix frontend",
+    "dev": "npx -y concurrently \"npm run server\" \"npm run client\""
+  }
+}

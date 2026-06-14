@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { AuthContext } from '../context/AuthContext';
 import AutocompleteInput from '../components/AutocompleteInput';
@@ -33,6 +33,30 @@ export default function Home() {
   const [travelClass, setTravelClass] = useState('3A');
   const [tripType, setTripType] = useState('one-way'); // one-way | round-trip
 
+  // --- Interactive mouse-tracking glow & tilt for the booking box ---
+  const bookingBoxRef = useRef(null);
+  const [mouseGlow, setMouseGlow] = useState({ x: 50, y: 50, opacity: 0 });
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+
+  const handleBoxMouseMove = useCallback((e) => {
+    const el = bookingBoxRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMouseGlow({ x, y, opacity: 1 });
+
+    // Subtle 3D tilt: max ±3 degrees
+    const tiltX = ((y - 50) / 50) * -3;
+    const tiltY = ((x - 50) / 50) * 3;
+    setTilt({ rotateX: tiltX, rotateY: tiltY });
+  }, []);
+
+  const handleBoxMouseLeave = useCallback(() => {
+    setMouseGlow((prev) => ({ ...prev, opacity: 0 }));
+    setTilt({ rotateX: 0, rotateY: 0 });
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!from.trim() || !to.trim()) return;
@@ -62,9 +86,42 @@ export default function Home() {
         style={{ backgroundImage: "url('/old-static-html/assets/images/rail2.jpg')" }} 
       />
 
-      {/* Glassmorphic Search Form Box */}
-      <section className="bg-cardBg border border-borderGlass rounded-2xl p-8 shadow-2xl relative overflow-hidden backdrop-blur-md glow-indigo">
-        <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-accentCyan via-indigo-500 to-amber-500" />
+      {/* Glassmorphic Search Form Box — with interactive mouse glow & tilt */}
+      <section
+        ref={bookingBoxRef}
+        onMouseMove={handleBoxMouseMove}
+        onMouseLeave={handleBoxMouseLeave}
+        className="bg-cardBg border border-borderGlass rounded-2xl p-8 shadow-2xl relative overflow-hidden backdrop-blur-md glow-indigo"
+        style={{
+          perspective: '1000px',
+          transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+          transition: 'transform 0.15s ease-out',
+        }}
+      >
+        {/* Animated gradient spotlight that follows the cursor */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 rounded-2xl"
+          style={{
+            background: `radial-gradient(600px circle at ${mouseGlow.x}% ${mouseGlow.y}%, rgba(6, 182, 212, 0.12), rgba(99, 102, 241, 0.06) 40%, transparent 70%)`,
+            opacity: mouseGlow.opacity,
+            transition: 'opacity 0.4s ease',
+          }}
+        />
+        {/* Border shimmer on hover */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 rounded-2xl"
+          style={{
+            background: `radial-gradient(400px circle at ${mouseGlow.x}% ${mouseGlow.y}%, rgba(6, 182, 212, 0.25), transparent 60%)`,
+            opacity: mouseGlow.opacity,
+            transition: 'opacity 0.4s ease',
+            mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            maskComposite: 'exclude',
+            WebkitMaskComposite: 'xor',
+            padding: '1px',
+          }}
+        />
+        <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-accentCyan via-indigo-500 to-amber-500 z-10" />
         
         <h1 className="text-3xl sm:text-4xl font-extrabold text-center tracking-tight text-white mb-8 font-headings">
           Book Your Train Tickets

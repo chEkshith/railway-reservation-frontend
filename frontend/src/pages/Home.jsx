@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
+import  { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { AuthContext } from '../context/AuthContext';
 import AutocompleteInput from '../components/AutocompleteInput';

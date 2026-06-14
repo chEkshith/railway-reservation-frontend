@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="text-textSecondary text-sm leading-relaxed max-w-sm">
             A next-generation, high-performance web platform designed to streamline national railway ticket distribution with absolute visual precision and speed.
           </p>
-          <p className="text-textMuted text-xs mt-2">Made by Group No.3 | Production Ready</p>
+          {/* <p className="text-textMuted text-xs mt-2">Made by Group No.3 | Production Ready</p> */}
         </div>
 
         <div className="flex flex-col gap-3">
@@ -46,7 +46,7 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto border-t border-white/5 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-textMuted gap-4">
         <p>&copy; 2026 RailPass Reservation. Designed for absolute production standards.</p>
-        <p>System Online: 99.9% SLA</p>
+        {/* <p>System Online: 99.9% SLA</p> */}
       </div>
     </footer>
   );
